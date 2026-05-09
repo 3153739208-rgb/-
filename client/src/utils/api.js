@@ -2,6 +2,9 @@ import axios from 'axios';
 
 // 生产环境后端地址（部署后端后替换为实际地址）
 const API_BASE = import.meta.env.VITE_API_BASE || '/api';
+export const BACKEND_HOST = import.meta.env.VITE_API_BASE
+  ? new URL(import.meta.env.VITE_API_BASE).origin
+  : '';
 
 const api = axios.create({
   baseURL: API_BASE,

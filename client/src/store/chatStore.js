@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { io } from 'socket.io-client';
-import { messagesAPI } from '../utils/api';
+import { messagesAPI, BACKEND_HOST } from '../utils/api';
 
 const useChatStore = create((set, get) => ({
   socket: null,
@@ -9,7 +9,7 @@ const useChatStore = create((set, get) => ({
   onlineUsers: new Set(),
 
   connect: (token) => {
-    const socket = io('/', { auth: { token } });
+    const socket = io(BACKEND_HOST || '/', { auth: { token } });
     socket.on('new_message', (msg) => {
       set((s) => ({ unreadCount: s.unreadCount + 1 }));
     });
